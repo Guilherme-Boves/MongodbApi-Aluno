@@ -1,0 +1,77 @@
+const database = 'LabBD';
+const collection = 'aluno';
+
+// The current database to use.
+use(database);
+
+// Create a new collection.
+db.createCollection(collection, {
+  validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['matricula', 'nome', 'curso', 'genero', 'dtnascimento'],
+            properties: {
+                matricula: {
+                    bsonType: 'int',
+                    description: 'Número de matrícula é obrigatório'
+                },
+                nome: {
+                    bsonType: 'string',
+                    description: 'Nome é obrigatório'
+                },
+                curso: {
+                    bsonType: 'string',
+                    description: 'O curso é obrigatório'
+                },
+                genero: {
+                    enum: ['Feminino', 'Masculino', 'Outro'],
+                    description: 'O gênero deve ser "Feminino", "Masculino" ou "Outro"'
+                },
+                dtnascimento: {
+                    bsonType: 'string',
+                    description: 'A data é obrigatória'
+                },
+            }
+        }
+    }
+});
+ 
+db.aluno.find({},{})
+
+db.aluno.createIndex({matricula: 1},{unique:true})
+
+//Insere um novo registro
+db.aluno.insertOne(
+  {
+    matricula: 1,
+      "nome": 'Roberto',
+      "curso": 'Análise de Sistemas',
+      "genero": 'Masculino',
+      "dtnascimento": "24/12/2001"  
+  }
+)
+
+db.aluno.insertMany(
+  [
+    {
+    matricula: 2,
+      "nome": 'Mariana',
+      "curso": 'Análise de Sistemas',
+      "genero": 'Outro',
+      "dtnascimento": "15/09/2003"  
+    },
+    {
+    matricula: 3,
+      "nome": 'Lauane',
+      "curso": 'Tecnologia da Informação',
+      "genero": 'Feminino',
+      "dtnascimento": "05/01/2002"  
+    }
+  ]  
+)
+
+//Lista todos os registros
+db.aluno.find()
+
+db.aluno.find({nome: /maria/i})
+

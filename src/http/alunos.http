@@ -1,0 +1,53 @@
+//Teste de Requisições REST - Alunos
+@baseURL = http://localhost:4000
+@id = 6196d2078804f8a98deccc54
+
+@nomeAluno = Mar
+###
+// GET - Lista todos os alunos
+GET {{baseURL}}/alunos
+Content-Type: application/json
+
+###
+// GET - Lista apenas um aluno pelo id
+GET {{baseURL}}/alunos/{{id}}
+Content-Type: application/json
+
+###
+// GET - Lista alunos pelo nome
+GET {{baseURL}}/alunos/nome/{{nomeAluno}}
+Content-Type: application/json
+
+###
+// POST - Inclui um novo aluno
+POST {{baseURL}}/alunos
+Content-Type: application/json
+
+{
+   "matricula": 5,
+   "nome": "Gabriel",
+   "curso": "Gestão de Ti",
+   "genero": "Masculino",
+   "dtnascimento": "04/03/2000"
+}
+
+### 
+// DELETE - Apaga um aluno através do id informado
+DELETE {{baseURL}}/alunos/{{id}}
+Content-Type: application/json
+
+###
+// PUT - Altera um aluno pelo ID
+PUT {{baseURL}}/alunos/
+Content-Type: application/json
+
+{
+   "_id": "6196d2078804f8a98deccc54",
+   "matricula": 6,
+   "nome": "Lauane",
+   "curso": "Medicina",
+   "genero": "Feminino",
+   "dtnascimento": "05/01/2002"
+}
+
+
